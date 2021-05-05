@@ -21,3 +21,12 @@ int lcs(int x, int y, string s1, string s2)
         return dp[x][y];
     }
 ```
+
+## 2) LIS O(n*n)
+
+```c++
+
+
+```
+
+
