@@ -69,5 +69,60 @@ int maximumPath(int N, vector<vector<int>> Matrix)
     }
 
 ```
+## 7) Equal Partition Problem  O(n*(sum of elements))
+
+```c++
+int equalPartition(int n, int a[])
+    {
+       int sum=0;
+       for(int i=0 ; i<n ; ++i)
+        sum+=a[i];
+       if(sum%2!=0)
+        return 0;
+        sum=sum/2;
+        bool dp[n+1][sum+1];
+        for(int i=0 ; i<=n ; ++i)
+        {
+            for(int j=0 ; j<=sum ; ++j)
+            {
+                if(i==0 && j==0)
+                        dp[i][j]=true;
+                else if(i==0)
+                        dp[i][j]=false;
+                else if(j==0)
+                        dp[i][j]=true;
+                else if(a[i-1]<=j)
+                {
+                    dp[i][j]=dp[i-1][j]||dp[i-1][j-a[i-1]];
+                }
+                else
+                    dp[i][j]=dp[i-1][j];
+            }
+        }
+        return dp[n][sum];
+    }
+
+```
+## 8) Optimal Strategy For A Game (Recursive ) 
+
+```c++
+long long ansfor(int a[] , int i , int j)
+{
+    if(dp[i][j]!=-1)
+        return dp[i][j];
+    if(j<=i)
+        return 0;
+    else
+        dp[i][j]= max(a[i]+ min(ansfor(a,i+2,j) ,ansfor(a,i+1,j-1) ),a[j]+min( ansfor(a,i,j-2) ,ansfor(a,i+1,j-1)) );
+
+    return dp[i][j] ;
+}
+
+long long maximumAmount(int a[], int n) 
+{
+    memset(dp,-1,sizeof(dp));
+    return ansfor(a,0,n-1);
+}
+```
 
 
